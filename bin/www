@@ -1,0 +1,36 @@
+
+const http = require('http');
+const https = require('https');
+const fs = require('fs');
+const config = require('../config/config.js');
+const app = require('../app');
+
+const key = fs.readFileSync(`${__dirname}/../ssl/key.pem`);
+const cert = fs.readFileSync(`${__dirname}/../ssl/cert.pem`);
+
+const httpsServerOptions = {
+    key,
+    cert
+};
+
+// == HTTP Section (START) ==
+
+const httpServer = http.createServer(app);
+
+httpServer.listen(config.httpPort, () => {
+    console.log(`The server is listening on port ${config.httpPort}, current environment: ${config.environment}`);
+});
+
+// == HTTP Section (END) ==
+
+
+
+// == HTTPS Section (START) ==
+
+const httpsServer = https.createServer(httpsServerOptions, app);
+
+httpsServer.listen(config.httpsPort, () => {
+    console.log(`The server is listening on port ${config.httpsPort}, current environment: ${config.environment}`);
+});
+
+// == HTTPS Section (END) ==
