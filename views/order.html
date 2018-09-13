@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- include: includes/head.html -->
+</head>
+<body>
+    <!-- include: includes/header-profile.html -->
+
+    <main class="content-wrap mdc-top-app-bar--fixed-adjust content-wrap_align-center">
+        <div class="mdc-typography">
+            <h2 class="mdc-typography--headline4 center">Amount of your order is ${{ amount }}</h2>
+            <h3 class="mdc-typography--headline5 center">Put your credit card information to proceed payment</h3>
+
+            <form action="/orders/pay" method="post" id="payment-form">
+                <input name="id" type="hidden" value="{{ orderId }}">
+
+                <div class="form-row">
+                    <div id="card-element">
+                        <!-- A Stripe Element will be inserted here. -->
+                    </div>
+
+                    <!-- Used to display Element errors. -->
+                    <div id="card-errors" role="alert"></div>
+                </div>
+
+                <div class="align-right">
+                    <button class="mdc-button mdc-button--raised">Submit Payment</button>
+                </div>
+
+            </form>
+        </div>
+
+    </main>
+
+    <div class="mdc-snackbar mdc-snackbar--align-center pizza-cart-snackbar" aria-live="assertive"
+         aria-atomic="true"
+         aria-hidden="true">
+        <div class="mdc-snackbar__text"></div>
+        <div class="mdc-snackbar__action-wrapper">
+            <button type="button" class="mdc-snackbar__action-button"></button>
+        </div>
+    </div>
+
+    <!-- include: includes/scripts.html -->
+</body>
+</html>

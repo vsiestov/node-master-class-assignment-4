@@ -1,0 +1,116 @@
+html,
+body {
+    height: 100%;
+}
+
+.content-wrap {
+
+}
+
+.form-message {
+    margin: 0 0 20px;
+    display: none;
+}
+
+.form-message.visible {
+    display: block;
+}
+
+.content-wrap_align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100% - 64px);
+}
+
+.form {
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 20px 20px 10px;
+}
+
+.center {
+    text-align: center;
+}
+
+.form__input {
+    width: 100%;
+    margin: 0 0 10px;
+}
+
+.button__container {
+    padding: 10px 0;
+    text-align: right;
+}
+
+.button__container .mdc-button {
+}
+
+.button__container span {
+    margin: 0 10px;
+}
+
+.full-center {
+    display: flex;
+    align-items: center;
+}
+
+.full-center .form {
+    align-self: center;
+}
+
+.pizza__description {
+    position: relative;
+    padding: 20px;
+}
+
+.pizza__description-price {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.carts__item-image {
+    background: center no-repeat;
+    background-size: contain;
+}
+
+.pizza__list {
+    max-width: 600px;
+    width: 100%;
+}
+
+.carts__item-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.form-row {
+    margin: 0 0 20px;
+}
+
+.table {
+    max-width: 600px;
+    width: 100%;
+}
+
+.table th:first-child {
+    text-align: left;
+}
+
+.table th {
+    padding: 10px;
+}
+
+.table td {
+    padding: 10px;
+}
+
+.order-visibility-status-paid {
+    display: none;
+}

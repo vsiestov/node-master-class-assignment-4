@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- include: includes/head.html -->
+</head>
+<body>
+    <!-- include: includes/header-profile.html -->
+
+    <main class="content-wrap mdc-top-app-bar--fixed-adjust content-wrap_align-center">
+
+        <form class="form" action="/me" method="post">
+
+            <div class="form-message center {{ messageVisibility }}">
+                <div class="mdc-chip">
+                    <i class="material-icons mdc-chip__icon mdc-chip__icon--leading">error_outline</i>
+                    <div class="mdc-chip__text">{{ errors }}</div>
+                </div>
+            </div>
+
+            <div class="mdc-text-field form__input mdc-text-field--outlined">
+                <input type="text" id="input-first-name" name="firstName" class="mdc-text-field__input" required autocomplete="given-name" value="{{ firstName }}">
+                <label class="mdc-floating-label" for="input-first-name">First name</label>
+                <div class="mdc-notched-outline">
+                    <svg>
+                        <path class="mdc-notched-outline__path"/>
+                    </svg>
+                </div>
+                <div class="mdc-notched-outline__idle"></div>
+            </div>
+
+            <div class="mdc-text-field form__input mdc-text-field--outlined">
+                <input type="text" id="input-last-name" name="lastName" class="mdc-text-field__input" required autocomplete="family-name" value="{{ lastName }}">
+                <label class="mdc-floating-label" for="input-last-name">Last name</label>
+                <div class="mdc-notched-outline">
+                    <svg>
+                        <path class="mdc-notched-outline__path"/>
+                    </svg>
+                </div>
+                <div class="mdc-notched-outline__idle"></div>
+            </div>
+
+            <div class="mdc-text-field form__input mdc-text-field--outlined">
+                <input type="email" id="input-email" name="email" class="mdc-text-field__input" disabled autocomplete="email" value="{{ email }}" >
+                <label class="mdc-floating-label" for="input-email">Your email</label>
+                <div class="mdc-notched-outline">
+                    <svg>
+                        <path class="mdc-notched-outline__path"/>
+                    </svg>
+                </div>
+                <div class="mdc-notched-outline__idle"></div>
+            </div>
+
+            <div class="mdc-text-field mdc-text-field--textarea">
+                <textarea id="textarea" class="mdc-text-field__input" name="address" rows="3" cols="40">{{ address }}</textarea>
+                <label for="textarea" class="mdc-floating-label">Address</label>
+            </div>
+
+            <div class="button__container">
+                <button type="submit" class="mdc-button mdc-button--raised">Submit</button>
+            </div>
+
+        </form>
+
+    </main>
+
+    <!-- include: includes/scripts.html -->
+</body>
+</html>

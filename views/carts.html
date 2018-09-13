@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- include: includes/head.html -->
+</head>
+<body>
+    <!-- include: includes/header-cart.html -->
+
+    <main class="content-wrap mdc-top-app-bar--fixed-adjust content-wrap_align-center">
+        <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list pizza__list" aria-orientation="vertical">
+            <!-- loop:list: includes/cart-item.html -->
+        </ul>
+    </main>
+
+    <div class="mdc-snackbar mdc-snackbar--align-center pizza-cart-snackbar" aria-live="assertive"
+         aria-atomic="true"
+         aria-hidden="true">
+        <div class="mdc-snackbar__text"></div>
+        <div class="mdc-snackbar__action-wrapper">
+            <button type="button" class="mdc-snackbar__action-button"></button>
+        </div>
+    </div>
+
+    <div class="mdc-snackbar mdc-snackbar--align-center pizza-cart-snackbar" aria-live="assertive"
+         aria-atomic="true"
+         aria-hidden="true">
+        <div class="mdc-snackbar__text"></div>
+        <div class="mdc-snackbar__action-wrapper">
+            <button type="button" class="mdc-snackbar__action-button"></button>
+        </div>
+    </div>
+
+    <!-- include: includes/scripts.html -->
+</body>
+</html>

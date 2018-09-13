@@ -2,6 +2,7 @@ const tokens = require('../modules/tokens/tokens.module');
 const carts = require('../modules/carts/carts.module');
 const validation = require('../lib/validation');
 const pizzas = require('../modules/pizzas/pizzas.module');
+const template = require('../modules/template/template.module');
 
 /**
  * carts.application endpoints
@@ -11,6 +12,8 @@ const pizzas = require('../modules/pizzas/pizzas.module');
  */
 
 module.exports = (path, router) => {
+
+    const viewLocation = `${__dirname}/../views`;
 
     /**
      * Get extended info about pizza items
@@ -34,6 +37,8 @@ module.exports = (path, router) => {
      */
     router.get(`/${path}`, tokens.verify(), (req, res) => {
 
+        const isJson = req.headers['content-type'] === 'application/json';
+
         return Promise.resolve()
             .then(() => { // Find user's cart
                 return carts.findOne(req.user.email)
@@ -42,9 +47,37 @@ module.exports = (path, router) => {
                 return getPizzaInfo(response || []);
             })
             .then((response) => {
-                res.send(response);
+
+                if (!isJson) {
+                    return template.render(viewLocation, 'carts.html', {
+                        title: 'Pizza delivery',
+                        description: 'Pizza delivery description page',
+                        pageHeader: 'Page header from template',
+                        list: response,
+                        header: 'Your shopping cart'
+                    })
+                        .then((response) => {
+                            res.sendHtml(response);
+                        })
+                }
+
+                return res.send(response);
             })
             .catch((error) => {
+
+                if (!isJson) {
+
+                    req.flash({
+                        errors: [error]
+                    });
+
+                    res.writeHead(301, {
+                        Location: '/error'
+                    });
+
+                    return res.send();
+                }
+
                 return res.send({
                     errors: [error]
                 }, 500);

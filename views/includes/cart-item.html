@@ -1,0 +1,10 @@
+<li class="mdc-list-item">
+    <div class="carts__item-content">
+        <span class="mdc-list-item__graphic carts__item-image" style="background-image: url({{ picture }})"></span>
+        <span class="mdc-list-item__text">
+            <span class="mdc-list-item__primary-text">{{ name }}</span>
+            <span class="mdc-list-item__secondary-text">{{ description }}. <strong>${{ price }}</strong></span>
+        </span>
+    </div>
+    <span class="mdc-icon-button material-icons carts__item-delete" data-id="{{ id }}">delete</span>
+</li>

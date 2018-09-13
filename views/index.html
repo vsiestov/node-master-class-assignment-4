@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- include: includes/head.html -->
+</head>
+<body>
+    <!-- include: includes/header.html -->
+
+    <main class="content-wrap mdc-top-app-bar--fixed-adjust content-wrap_align-center">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <!-- loop:list: includes/pizza-item.html -->
+            </div>
+        </div>
+    </main>
+
+    <div class="mdc-snackbar mdc-snackbar--align-center pizza-cart-snackbar" aria-live="assertive"
+         aria-atomic="true"
+         aria-hidden="true">
+        <div class="mdc-snackbar__text"></div>
+        <div class="mdc-snackbar__action-wrapper">
+            <button type="button" class="mdc-snackbar__action-button"></button>
+        </div>
+    </div>
+
+    <!-- include: includes/scripts.html -->
+</body>
+</html>

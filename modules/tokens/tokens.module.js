@@ -22,26 +22,17 @@ class Tokens extends CRUD {
         return super.create(params);
     }
 
-    /**
-     * Check provided token and extend request object with retrieved user information
-     *
-     * @returns {Function} - callback middleware function
-     */
-    verify() {
-        return (req, res, next) => {
-            const token = req.headers.token || req.body.token || req.query.token;
+    checkToken(req) {
+        return new Promise((fullFill, reject) => {
+            const token = req.headers.token || req.body.token || req.query.token || req.cookies.token;
 
             if (!token) {
-                return res.send({
-                    errors: [
-                        'You are not authorized for this resource'
-                    ]
-                });
+                return reject('You are not authorized for this resource')
             }
 
             this.findOne(token)
                 .then((response) => {
-                    if (response.expires < Date.now()) {
+                    if (!response || response.expires < Date.now()) {
                         return Promise.reject('Your token is expired');
                     }
 
@@ -51,18 +42,40 @@ class Tokens extends CRUD {
                     req.user = response;
                     req.token = token;
 
+                    return fullFill();
+                })
+                .catch((error) => {
+                    return reject(error);
+                });
+        });
+    }
+
+    /**
+     * Check provided token and extend request object with retrieved user information
+     *
+     * @returns {Function} - callback middleware function
+     */
+    verify() {
+        return (req, res, next) => {
+            this.checkToken(req)
+                .then(() => {
                     return next();
                 })
                 .catch((error) => {
-                    if (error.code === 'ENOENT') {
+
+                    if (req.headers['content-type'] === 'application/json') {
                         return res.send({
-                            errors: ['You are not authorized for this resource']
-                        }, 500);
+                            errors: [
+                                error
+                            ]
+                        }, 401);
                     }
 
-                    return res.send({
-                        errors: [error]
-                    }, 500);
+                    res.writeHead(301, {
+                        Location: '/error'
+                    });
+
+                    return res.end();
                 });
         }
     }
