@@ -10,6 +10,7 @@ const users = require('../users/users.module');
  * @property {String} id
  * @property {String} status
  * @property {String} userId
+ * @property {String} createdAt
  * @property {Array<IPizzaItem>} items
  * @property {String} stripeId
  */
@@ -22,18 +23,23 @@ class Orders extends CRUD {
     /**
      * Get a list of the user's orders
      *
-     * @param {String} userId - user identity
+     * @param {String} [userId] - user identity
      * @returns {Promise<Array<IOrder>>}
      */
     find(userId) {
-        return users.findOne(userId)
-            .then((response) => {
-                const orders = response.orders || [];
 
-                return Promise.all(orders.map((item) => {
-                    return super.findOne(item);
-                }));
-            });
+        if (userId) {
+            return users.findOne(userId)
+                .then((response) => {
+                    const orders = response.orders || [];
+
+                    return Promise.all(orders.map((item) => {
+                        return super.findOne(item);
+                    }));
+                });
+        }
+
+        return super.find();
     }
 
     /**
@@ -44,10 +50,14 @@ class Orders extends CRUD {
      * @returns {Promise<IOrder>}
      */
     findOne(userId, orderId) {
+        if (!userId && orderId) {
+            return super.findOne(orderId);
+        }
+
         return users.findOne(userId)
             .then((response) => {
 
-                const orders = response.orders || [];
+                const orders = response && response.orders || [];
                 const index = orders.indexOf(orderId);
 
                 if (index === -1) {

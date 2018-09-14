@@ -12,6 +12,18 @@ For production
 NODE_ENV=production node bin/www
 ```
 
+### CLI manual
+
+ - man: Show help
+ - exit: Stop this CLI and the pizza delivery app
+ - menu: View all current menu items
+ - recent orders: View all the recent orders in the system (orders placed in the last 24 hours)
+ - order detail --{orderId}: Lookup the details of a specific order by order ID
+ - users: View all the users who have signed up in the last 24 hours
+ - user --{email}: Lookup the details of a specific user by email address
+
+
+
 ### Public endpoints
 
 1. User sign up
